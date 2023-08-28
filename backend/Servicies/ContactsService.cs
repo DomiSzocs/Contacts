@@ -18,37 +18,38 @@ namespace backend.Servicies
             _mapper = mapper;
         }
 
-        public async Task<List<Contact>> GetAllContactsAsync()
+        public async Task<List<ContactShortResponseDTO>> GetAllContactsAsync()
         {
-            return await _dbContext.Contacts.ToListAsync();
+            var contacts = await _dbContext.Contacts.ToArrayAsync();
+            return contacts.Select(contact => _mapper.Map<ContactShortResponseDTO>(contact)).ToList();
         }
 
-        public async Task<ContactResponseDTO?> GetContactByIdAsync(int id)
+        public async Task<ContacDetailResponseDTO?> GetContactByIdAsync(int id)
         {
             var contact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == id);
 
             if (contact == null) throw new ContactNotFoundException(id);
 
-            return _mapper.Map<ContactResponseDTO>(contact);
+            return _mapper.Map<ContacDetailResponseDTO>(contact);
         }
 
-        public async Task CreateContactAsync(ContactRequestDTO contactRequest)
+        public async Task CreateContactAsync(ContactDetailRequestDTO contactRequest)
         {
             var contact = _mapper.Map<Contact>(contactRequest);
             await _dbContext.Contacts.AddAsync(contact);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateContactAsync(int id, ContactRequestDTO contactRequest)
+        public async Task UpdateContactAsync(int id, ContactDetailRequestDTO contactRequest)
         {
-            var findContact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == id);
+            var contact = await _dbContext.Contacts.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (findContact == null) throw new ContactNotFoundException(id);
+            if (contact == null) throw new ContactNotFoundException(id);
 
-            var contact = _mapper.Map<Contact>(contactRequest);
+            _mapper.Map(contactRequest, contact);
             contact.Id = id;
-            _dbContext.Contacts.Update(contact);
             await _dbContext.SaveChangesAsync();
+
         }
 
         public async Task DeleteContactAsync(int id)

@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.Servicies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,21 @@ builder.Services.AddScoped<ContactsService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddLogging();
+
 var app = builder.Build();
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,6 +45,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAll");
+
+app.Use(async (context, next) =>
+{
+    logger.LogInformation($"[{context.Request.Method}] {context.Request.Path} {context.Request.Body.ToString()}");
+    await next.Invoke();
+});
 
 app.UseHttpsRedirection();
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Details</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src='/details.js' defer></script>
+  <link rel='stylesheet' type='text/css' media='screen' href='/index.css'>
+</head>
+<body>
+  <a class='menu-link' href='/'><span>Back To Contacts</span></a>
+  <div class='contact-detail' id='<%= contact.id %>'>
+    <% if(contact) { %>
+        <input type='text' value='<%= contact.name %>' disabled='true' id='name'>
+        <input type='text' value='<%= contact.phoneNumber %>' disabled='true' id='phone-number'>
+        <input type='text' value='<%= contact.note %>' disabled='true' id='note'>
+        <input type='button' value='Edit' id='edit-button'/>
+        <input type='button' value='Save' id='save-button'/>
+        <input type='button' value='Delete' id='delete-button'/>
+    <% } else { %>
+      <p>The contact does not exsist!</p>
+    <% } %>
+  </div>
+</body>
+</html>

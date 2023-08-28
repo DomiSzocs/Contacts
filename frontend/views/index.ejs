@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Contacts</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='index.js' defer></script>
+  <link rel='stylesheet' type='text/css' media='screen' href='index.css'>
+</head>
+<body>
+  <div class='content'>
+    <div class='search-bar'>
+      <input type="text" placeholder="Search by name or phone number" id="search-input"/>
+    </div>
+    <a class="add-contact" href="/add_new_contact"><i class="fa fa-plus"></i></a>
+    <div class='contact-container'>
+      <div class='contact-scrollable'>
+        <% if(contacts) { %>
+          <% contacts.forEach((contact) => { %>
+            <a href='/contacts/<%= contact.id %>' class='contact-entry' id='<%= contact.id %>'>
+              <span>
+                <i class='fa fa-address-book'><%= contact.name %></i>
+              </span>
+              <span>
+                <i class='fa fa-phone'><%= contact.phoneNumber %></i>
+              </span>
+            </a>
+          <% }) %>
+        <% } else { %>
+          <p>No contacts at the moment!</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

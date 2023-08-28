@@ -3,12 +3,14 @@ using backend.Data.DTOs.Request;
 using backend.Data.DTOs.Response;
 using backend.Exceptions;
 using backend.Servicies;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace backend.Controllers
 {
+    [EnableCors("AllowAll")]
     [Route("api/[controller]")]
     [ApiController]
     public class ContactsController : ControllerBase
@@ -41,7 +43,7 @@ namespace backend.Controllers
         {
             try
             {
-                ContactResponseDTO? contactResponse = await ContactService.GetContactByIdAsync(id);
+                ContacDetailResponseDTO? contactResponse = await ContactService.GetContactByIdAsync(id);
                 if (contactResponse == null) return NotFound();
 
 
@@ -60,7 +62,7 @@ namespace backend.Controllers
 
         // POST api/<ContactController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ContactRequestDTO contactRequest)
+        public async Task<IActionResult> Post([FromBody] ContactDetailRequestDTO contactRequest)
         {
             try 
             {
@@ -76,11 +78,11 @@ namespace backend.Controllers
 
         // PUT api/<ContactController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] ContactRequestDTO contactRequest)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] ContactDetailRequestDTO contact)
         {
             try
             {
-                await ContactService.UpdateContactAsync(id, contactRequest);
+                await ContactService.UpdateContactAsync(id, contact);
                 return Ok();
             }
             catch (ContactNotFoundException ex)

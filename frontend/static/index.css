@@ -1,0 +1,153 @@
+html {
+  height: auto;
+  width: 100%;
+  background-color: #0d2226;
+}
+
+body {
+  height: auto;
+  width: 100%;
+}
+
+.content {
+  height: auto;
+  width: 100%;
+  position: fixed;
+}
+
+.contact-container {
+  height: 70vh;
+  width: 50%;
+  margin-left: 22%;
+  overflow: none;
+  position: relative;
+}
+
+.contact-scrollable {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding-right: 17px;
+  box-sizing: content-box;
+}
+
+.contact-scrollable::-webkit-scrollbar {
+  width: 0em;
+}
+
+.contact-entry {
+  width: 50%;
+  background-color: #b84f16;
+  padding: 0.25rem;
+  border-radius: 1.5rem;
+  font-size: 1.25rem;
+  margin-top: 0.25rem;
+  margin-left: 24%;
+  padding-left: 1rem;
+  display: block;
+}
+
+.contact-container span {
+  padding: 0.25rem;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.search-bar {
+  width: 52%;
+  display: inline-block;
+  margin-left: 22%;
+}
+
+.search-bar input {
+  margin-top: 10vh;
+  margin-left: 23%;
+  height: 3rem;
+  width: 50%;
+  border-radius: 1rem;
+}
+
+.fa-address-book:before {
+  margin-right: 0.75rem;
+}
+
+.fa-phone:before {
+  margin-right: 0.75rem;
+}
+
+.add-contact {
+  display: inline-block;
+  position: absolute;
+  top: 10vh;
+  left: 63%;
+}
+
+.add-contact i {
+  width: 3rem;
+  height: 3rem;
+  background-color: #2f6175;
+  font-size: 2rem;
+  border-radius: 50%;
+  display: flex;
+
+}
+
+.add-contact i::before {
+  margin-top: 17%;
+  margin-left: 23%;
+}
+
+.contact-detail {
+  margin-left: 33%;
+  margin-top: 14%;
+  width: 30vw;
+  height: 30vh;
+  background-color: #b84f16;
+  position: absolute;
+  border-radius: 1rem;
+}
+
+.contact-detail input[type="text"] {
+  display: block;
+  position: relative;
+  padding-left: 1rem;
+  color: #091530;
+}
+
+.contact-detail input[type="submit"],
+.contact-detail input[type="button"] {
+  border-radius: 10%;
+  position: relative;
+  cursor: pointer;
+}
+
+.contact-detail input {
+  border-radius: 1rem;
+  font-size: 1.25rem;
+  margin: 1rem;
+}
+
+#save-button {
+  display: none;
+}
+
+.menu-link {
+  display: block;
+  width: calc(10rem);
+  height: 5vh;
+  background-color: #b84f16;
+  text-align: center;
+  border-radius: 1rem;
+  margin: 1rem;
+  position: absolute;
+}
+
+.menu-link span {
+  position: relative;
+  display: block;
+  margin-top: 0.5rem;
+}

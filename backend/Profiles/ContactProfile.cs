@@ -10,9 +10,11 @@ namespace backend.Profiles
 
         public ContactProfile()
         {
-            CreateMap<Contact, ContactResponseDTO>();
+            CreateMap<Contact, ContacDetailResponseDTO>();
 
-            CreateMap<ContactRequestDTO, Contact>()
+            CreateMap<Contact, ContactShortResponseDTO>();
+
+            CreateMap<ContactDetailRequestDTO, Contact>()
             .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
